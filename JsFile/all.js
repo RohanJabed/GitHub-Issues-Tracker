@@ -19,7 +19,7 @@ const showModal = (issue) => {
 
     <!-- Status Row -->
     <div class="flex items-center gap-3 text-sm text-gray-500">
-        <span class="badge badge-success">Opened</span>
+        <span class="badge ${issue.status === "open" ? "bg-green-500" : "bg-purple-500"} ">${issue.status === "open" ? "Open"  : "Closed"}</span>
         <span>Opened by ${issue.author}</span>
         <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
     </div>
@@ -121,7 +121,7 @@ const displayData = (data) => {
         // console.log(issues)
         const div = document.createElement("div");
         div.innerHTML = `
-              <div class="card bg-base-100 shadow-sm relative h-full border-t-4  ${issues.status === "open" ? "border-green-500" : "border-purple-500"}">
+              <div class="card bg-base-100 shadow-sm cursor-pointer relative h-full border-t-4  ${issues.status === "open" ? "border-green-500" : "border-purple-500"}">
                 <span class="badge badge-warning absolute top-4 right-4">${issues.priority}</span>
                 <div class="card-body space-y-3">
                     <h2 class="card-title pr-16">${issues.title}</h2>
