@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <!-- tailwind +daisyui -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+
+<body>
+    <section class="min-h-screen flex items-center justify-center p-4">
+        <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-full max-w-md border p-8 mx-auto">
+            <div class="text-center mb-6">
+                <img src="assets/github-logo.png" alt="GitHub Logo" class="w-16 h-16 mx-auto mb-4">
+                <h2 class="font-bold text-2xl mb-2">GitHub Issues Tracker</h2>
+                <p class="text-base-content/70">Sign up to manage your issues</p>
+            </div>
+
+            <form class="space-y-4">
+                <div>
+                    <label class="label">
+                        <span class="label-text">Username</span>
+                    </label>
+                    <input id="user-name" type="text" class="input input-bordered w-full" placeholder="Enter Username" required />
+                </div>
+
+                <div>
+                    <label class="label">
+                        <span class="label-text">Password</span>
+                    </label>
+                    <input id="password" type="password" class="input input-bordered w-full" placeholder="Password" required />
+                </div>
+
+                <button id="sign-up" type="submit" class="btn btn-primary w-full mt-6">Sign Up</button>
+
+                <p class="text-center text-sm mt-4">
+                    Already have an account? <a href="#" class="link link-primary">Sign In</a>
+                </p>
+            </form>
+        </fieldset>
+    </section>
+    <script src="JsFile/login.js"></script>
+</body>
+
+</html>
