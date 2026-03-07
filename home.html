@@ -57,7 +57,7 @@
         <div class="bg-base-100 shadow-sm rounded-lg p-6 flex items-center gap-6">
             <img src="assets/Aperture.png" alt="Issues" class="w-15 h-15">
             <div class="flex-1">
-                <h2 id="count"class="text-2xl font-semibold">50 Issues</h2>
+                <h2 id="count" class="text-2xl font-semibold">50 Issues</h2>
                 <h3 class=" text-[#64748B] mb-2">Track and manage your project issues</h3>
 
             </div>
@@ -94,6 +94,26 @@
             </div>
         </div>
     </section>
+
+    <!-- modal section -->
+
+    <!-- Open the modal using ID.showModal() method -->
+    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+    <dialog id="issue_modal" class="modal modal-bottom sm:modal-middle">
+        <div id="modals" class="modal-box">
+            <h3 id="modal-title" class="text-lg font-bold">Fix broken image uploads</h3>
+            <p id="modal-desc" class="py-4">The navigation menu doesn't collapse properly on mobile devices. Need to fix
+                the responsive behavior.</p>
+            <div id="modal-extra" class="modal-action">
+                <form method="dialog">
+                    <!-- if there is a button in form, it will close the modal -->
+                    <button class="btn">Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+
     <script src="JsFile/all.js"></script>
 </body>
 

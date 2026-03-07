@@ -3,6 +3,68 @@ const createElements = (arr) => {
     return (htmlElements.join(' '))
 }
 
+const loadModal = (id) => {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`
+    fetch(url)
+        .then(res => res.json())
+        .then(json => showModal(json.data))
+
+}
+const showModal = (issue) => {
+    document.getElementById("modals").innerHTML = `
+        <div class="space-y-6">
+
+    <!-- Title -->
+    <h2 class="text-3xl font-bold">${issue.title}</h2>
+
+    <!-- Status Row -->
+    <div class="flex items-center gap-3 text-sm text-gray-500">
+        <span class="badge badge-success">Opened</span>
+        <span>Opened by ${issue.author}</span>
+        <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
+    </div>
+
+    <!-- Labels -->
+    <div class="flex gap-3">
+         ${createElements(issue.labels)}
+    </div>
+
+    <!-- Description -->
+    <p class="text-gray-600">
+        ${issue.description}
+    </p>
+
+    <!-- Assignee & Priority -->
+    <div class="flex justify-between bg-base-200 p-6 rounded-xl">
+
+        <div>
+            <p class="text-gray-500">Assignee:</p>
+            <h3 class="text-lg font-semibold">${issue.assignee ? issue.assignee :
+            "No name found"}</h3>
+        </div>
+
+        <div>
+            <p class="text-gray-500">Priority:</p>
+            <span class="badge badge-error badge-lg">${issue.priority}</span>
+        </div>
+
+    </div>
+
+    <!-- Close Button -->
+    <div class="modal-action">
+        <form method="dialog">
+            <button class="btn btn-primary">Close</button>
+        </form>
+    </div>
+
+</div>
+    
+    
+    `
+
+    document.getElementById("issue_modal").showModal();
+}
+
 
 const loadData = () => {
     const url = "https://phi-lab-server.vercel.app/api/v1/lab/issues";
@@ -74,6 +136,10 @@ const displayData = (data) => {
                 </div>
             </div>
         `;
+        div.addEventListener("click", () => {
+            loadModal(issues.id);
+        });
+
         allContainer.appendChild(div);
     }
 }
