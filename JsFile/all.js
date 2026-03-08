@@ -1,5 +1,5 @@
 const createElements = (arr) => {
-    const htmlElements = arr.map((arr) => `<span class="${arr === "bug"? "bg-red-300":arr==="help wanted"? "bg-yellow-200":"bg-green-300"} font-semibold badge bg-[#FDE68A] ">${arr}</span>`);
+    const htmlElements = arr.map((arr) => `<span class="${arr === "bug"? "bg-red-300":arr==="help wanted"? "bg-yellow-200":"bg-green-300"} font-medium badge bg-[#FDE68A] ">${arr}</span>`);
     return (htmlElements.join(' '))
 }
 
