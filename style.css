@@ -1,3 +1,8 @@
 *{
       font-family: "Geist", sans-serif;
 }
+/* custom active class */
+.btn.active {
+    background-color: #422AD5; /* green */
+    color: white;
+}

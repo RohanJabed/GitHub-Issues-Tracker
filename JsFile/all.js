@@ -1,4 +1,3 @@
-let allIssues = [];
 const createElements = (arr) => {
     const htmlElements = arr.map((arr) => `<span class="badge bg-[#FDE68A] text-yellow-600">${arr}</span>`);
     return (htmlElements.join(' '))
@@ -20,7 +19,7 @@ const showModal = (issue) => {
 
     <!-- Status Row -->
     <div class="flex items-center gap-3 text-sm text-gray-500">
-        <span class="badge ${issue.status === "open" ? "bg-green-500" : "bg-purple-500"} ">${issue.status === "open" ? "Open"  : "Closed"}</span>
+        <span class="badge ${issue.status === "open" ? "bg-green-500" : "bg-purple-500"} ">${issue.status === "open" ? "Open" : "Closed"}</span>
         <span>Opened by ${issue.author}</span>
         <span>${new Date(issue.createdAt).toLocaleDateString()}</span>
     </div>
@@ -72,7 +71,6 @@ const loadData = () => {
     fetch(url)
         .then(res => res.json())
         .then(json => {
-            allIssues = json.data;
             displayData(json.data)
             OpenBtn(json.data)
             CloseBtn(json.data)
@@ -80,9 +78,14 @@ const loadData = () => {
         })
 }
 
+
 const AllBtn = (all) => {
     const btnAll = document.getElementById("all-btn");
     btnAll.addEventListener("click", function () {
+        const buttons = document.querySelectorAll("#button-sections button");
+        buttons.forEach(b => b.classList.remove("active"));
+        btnAll.classList.add("active");
+
         const openContainer = document.getElementById('cards');
         openContainer.innerHTML = '';
         const openCount = document.getElementById('count');
@@ -93,6 +96,10 @@ const AllBtn = (all) => {
 const OpenBtn = (open) => {
     const openBtn = document.getElementById('open-btn');
     openBtn.addEventListener('click', function () {
+        const buttons = document.querySelectorAll("#button-sections button");
+        buttons.forEach(b => b.classList.remove("active"));
+        openBtn.classList.add("active");
+
         const openContainer = document.getElementById('cards');
         openContainer.innerHTML = '';
         const openIssues = open.filter(open => open.status === 'open');
@@ -105,6 +112,11 @@ const OpenBtn = (open) => {
 const CloseBtn = (closed) => {
     const btnClosed = document.getElementById("closed-btn");
     btnClosed.addEventListener("click", function () {
+
+        const buttons = document.querySelectorAll("#button-sections button");
+        buttons.forEach(b => b.classList.remove("active"));
+        btnClosed.classList.add("active");
+
         const openContainer = document.getElementById('cards');
         openContainer.innerHTML = '';
         const closedIssues = closed.filter(closed => closed.status === 'closed');
@@ -145,49 +157,46 @@ const displayData = (data) => {
         allContainer.appendChild(div);
     }
 }
+
 document.getElementById("btn-search").addEventListener("click", () => {
 
     const input = document.getElementById("input-search");
     const searchValue = input.value.trim().toLowerCase();
 
-    const cardsContainer = document.getElementById("cards");
-    const count = document.getElementById("count");
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+        .then(res => res.json())
+        .then(data => {
 
-    cardsContainer.innerHTML = "";
+            const issues = data.data;
 
-    // যদি input খালি থাকে
-    if (!searchValue) {
-        displayData(allIssues);
-        count.innerText = `${allIssues.length} Issues`;
-        return;
-    }
+            const container = document.getElementById("cards");
+            const count = document.getElementById("count");
 
-    // filter system
-    const filteredIssues = allIssues.filter(issue =>
-        issue.title.toLowerCase().includes(searchValue) ||
-        issue.description.toLowerCase().includes(searchValue)
-    );
+            container.innerHTML = "";
 
-    if (filteredIssues.length === 0) {
+            if (issues.length === 0) {
 
-        cardsContainer.innerHTML = `
-        <div class="col-span-full flex flex-col items-center justify-center p-9 bg-red-200 rounded-md">
-            <img class="mx-auto" src="./assets/alert-error.png" alt="">
-            <h1 class="text-center text-2xl font-bold mt-4">No Issue Available</h1>
-        </div>
-        `;
+                container.innerHTML = `
+                <div class="col-span-full flex flex-col items-center justify-center p-9 bg-red-200 rounded-md">
+                    <img class="mx-auto" src="./assets/alert-error.png" alt="">
+                    <h1 class="text-center text-2xl font-bold mt-4">No Issue Available</h1>
+                </div>
+                `;
 
-        count.innerText = `0 Issues`;
+                count.innerText = "0 Issues";
 
-    } else {
+            } else {
 
-        displayData(filteredIssues);
-        count.innerText = `${filteredIssues.length} Issues`;
+                displayData(issues);
+                count.innerText = `${issues.length} Issues`;
 
-    }
+            }
+
+        });
+       const buttons = document.querySelectorAll("#button-sections button");
+       buttons.forEach(b => b.classList.remove("active"));
 
 });
-
 
 
 loadData();
