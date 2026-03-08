@@ -217,12 +217,12 @@ document.getElementById("btn-search").addEventListener("click", () => {
 
             }
             setTimeout(() => {
+
                 ManageSpinner(false);
             }, 300);
 
         });
-
-    input.value = "";
+        
     const buttons = document.querySelectorAll("#button-sections button");
     buttons.forEach(b => b.classList.remove("active"));
 
