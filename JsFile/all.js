@@ -161,7 +161,7 @@ const displayData = (data) => {
         const div = document.createElement("div");
         div.innerHTML = `
               <div class="card bg-base-100 shadow-sm cursor-pointer relative h-full border-t-4  ${issues.status === "open" ? "border-green-500" : "border-purple-500"}">
-                <span class="badge badge-warning absolute top-4 right-4">${issues.priority}</span>
+                <span class="badge ${issues.priority==="high"? "bg-red-400":issues.priority==="medium"? "bg-yellow-200":"bg-gray-300"} badge-warning absolute top-4 right-4">${issues.priority}</span>
                 <div class="card-body space-y-3">
                     <h2 class="card-title pr-16">${issues.title}</h2>
                     <p class="text-[#64748B]">${issues.description}</p>
