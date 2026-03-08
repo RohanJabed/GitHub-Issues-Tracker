@@ -32,7 +32,7 @@
                 <span class="font-semibold text-lg">GitHub Issues Tracker</span>
             </div>
             <div class="flex gap-2 items-center">
-                <input id="input-search"  type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+                <input id="input-search" type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
                 <button id="btn-search" class="btn btn-primary gap-2">
                     <i class="fa-solid fa-plus"></i>
                     <span class="hidden md:inline">New Issue</span>
@@ -73,10 +73,13 @@
             </div>
         </div>
     </section>
-
+   
+    
     <!-- cards section -->
-    <section class="max-w-7xl mx-auto px-4 pb-6">
+    <section class="max-w-7xl mx-auto px-4 pb-6 relative">
+        <span id="spinner" class="loading loading-spinner loading-lg text-primary absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden"></span>
         <div id="cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[12px] auto-rows-fr">
+             
             <div class="card bg-base-100 shadow-sm relative hidden h-full">
                 <span class="badge badge-warning absolute top-4 right-4">High</span>
                 <div class="card-body space-y-3">
