@@ -222,7 +222,7 @@ document.getElementById("btn-search").addEventListener("click", () => {
             }, 300);
 
         });
-        
+    input.value = "";
     const buttons = document.querySelectorAll("#button-sections button");
     buttons.forEach(b => b.classList.remove("active"));
 
