@@ -1,3 +1,4 @@
+let allIssues = [];
 const createElements = (arr) => {
     const htmlElements = arr.map((arr) => `<span class="badge bg-[#FDE68A] text-yellow-600">${arr}</span>`);
     return (htmlElements.join(' '))
@@ -71,6 +72,7 @@ const loadData = () => {
     fetch(url)
         .then(res => res.json())
         .then(json => {
+            allIssues = json.data;
             displayData(json.data)
             OpenBtn(json.data)
             CloseBtn(json.data)
@@ -143,4 +145,49 @@ const displayData = (data) => {
         allContainer.appendChild(div);
     }
 }
+document.getElementById("btn-search").addEventListener("click", () => {
+
+    const input = document.getElementById("input-search");
+    const searchValue = input.value.trim().toLowerCase();
+
+    const cardsContainer = document.getElementById("cards");
+    const count = document.getElementById("count");
+
+    cardsContainer.innerHTML = "";
+
+    // যদি input খালি থাকে
+    if (!searchValue) {
+        displayData(allIssues);
+        count.innerText = `${allIssues.length} Issues`;
+        return;
+    }
+
+    // filter system
+    const filteredIssues = allIssues.filter(issue =>
+        issue.title.toLowerCase().includes(searchValue) ||
+        issue.description.toLowerCase().includes(searchValue)
+    );
+
+    if (filteredIssues.length === 0) {
+
+        cardsContainer.innerHTML = `
+        <div class="col-span-full flex flex-col items-center justify-center p-9 bg-red-200 rounded-md">
+            <img class="mx-auto" src="./assets/alert-error.png" alt="">
+            <h1 class="text-center text-2xl font-bold mt-4">No Issue Available</h1>
+        </div>
+        `;
+
+        count.innerText = `0 Issues`;
+
+    } else {
+
+        displayData(filteredIssues);
+        count.innerText = `${filteredIssues.length} Issues`;
+
+    }
+
+});
+
+
+
 loadData();
